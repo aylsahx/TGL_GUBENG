@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/batas_gubeng_1.js"></script>
+        <script src="data/landuse_gubeng_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.307634297442515,112.72841998705628],[-7.260998112567518,112.7936669278682]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Positron_0');
+        map.getPane('pane_Positron_0').style.zIndex = 400;
+        var layer_Positron_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Positron_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positron_0;
+        map.addLayer(layer_Positron_0);
+        function pop_batas_gubeng_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID_Batas_'] !== null ? autolinker.link(feature.properties['FID_Batas_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WADMKC</th>\
+                        <td>' + (feature.properties['WADMKC'] !== null ? autolinker.link(feature.properties['WADMKC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UP'] !== null ? autolinker.link(feature.properties['UP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_batas_gubeng_1_0() {
+            return {
+                pane: 'pane_batas_gubeng_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_batas_gubeng_1');
+        map.getPane('pane_batas_gubeng_1').style.zIndex = 401;
+        map.getPane('pane_batas_gubeng_1').style['mix-blend-mode'] = 'normal';
+        var layer_batas_gubeng_1 = new L.geoJson(json_batas_gubeng_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_batas_gubeng_1',
+            layerName: 'layer_batas_gubeng_1',
+            pane: 'pane_batas_gubeng_1',
+            onEachFeature: pop_batas_gubeng_1,
+            style: style_batas_gubeng_1_0,
+        });
+        bounds_group.addLayer(layer_batas_gubeng_1);
+        map.addLayer(layer_batas_gubeng_1);
+        function pop_landuse_gubeng_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Hirarki_2'] !== null ? autolinker.link(feature.properties['Hirarki_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Layer'] !== null ? autolinker.link(feature.properties['Layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Hirarki_1'] !== null ? autolinker.link(feature.properties['Hirarki_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Luas'] !== null ? autolinker.link(feature.properties['Luas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['L'] !== null ? autolinker.link(feature.properties['L'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Eksisting</th>\
+                        <td>' + (feature.properties['Eksisting'] !== null ? autolinker.link(feature.properties['Eksisting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ASOSIASI'] !== null ? autolinker.link(feature.properties['ASOSIASI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMA_OBJEK'] !== null ? autolinker.link(feature.properties['NAMA_OBJEK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUMBER_DAT'] !== null ? autolinker.link(feature.properties['SUMBER_DAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UPDATED'] !== null ? autolinker.link(feature.properties['UPDATED'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FUNGSI'] !== null ? autolinker.link(feature.properties['FUNGSI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Remark'] !== null ? autolinker.link(feature.properties['Remark'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_landuse_gubeng_2_0(feature) {
+            switch(String(feature.properties['Eksisting'])) {
+                case 'Kawasan Permukiman':
+                    return {
+                pane: 'pane_landuse_gubeng_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kawasan Peruntukan Industri':
+                    return {
+                pane: 'pane_landuse_gubeng_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,128,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ruang Terbuka Hijau Kota':
+                    return {
+                pane: 'pane_landuse_gubeng_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,232,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tanah Kosong':
+                    return {
+                pane: 'pane_landuse_gubeng_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_landuse_gubeng_2');
+        map.getPane('pane_landuse_gubeng_2').style.zIndex = 402;
+        map.getPane('pane_landuse_gubeng_2').style['mix-blend-mode'] = 'normal';
+        var layer_landuse_gubeng_2 = new L.geoJson(json_landuse_gubeng_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_landuse_gubeng_2',
+            layerName: 'layer_landuse_gubeng_2',
+            pane: 'pane_landuse_gubeng_2',
+            onEachFeature: pop_landuse_gubeng_2,
+            style: style_landuse_gubeng_2_0,
+        });
+        bounds_group.addLayer(layer_landuse_gubeng_2);
+        map.addLayer(layer_landuse_gubeng_2);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Eksisting": "str","WADMKC": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Eksisting = document.createElement('div');
+            div_Eksisting.id = "div_Eksisting";
+            div_Eksisting.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Eksisting);
+            sel_Eksisting = document.createElement('select');
+            sel_Eksisting.multiple = true;
+            sel_Eksisting.size = 5;
+            sel_Eksisting.id = "sel_Eksisting";
+            var Eksisting_options_str = "<option value='' unselected></option>";
+            sel_Eksisting.onchange = function(){filterFunc()};
+            Eksisting_options_str  += '<option value="NULL">NULL</option>';
+            Eksisting_options_str  += '<option value="Kawasan Permukiman">Kawasan Permukiman</option>';
+            Eksisting_options_str  += '<option value="Kawasan Peruntukan Industri">Kawasan Peruntukan Industri</option>';
+            Eksisting_options_str  += '<option value="Ruang Terbuka Hijau Kota">Ruang Terbuka Hijau Kota</option>';
+            Eksisting_options_str  += '<option value="Tanah Kosong">Tanah Kosong</option>';
+            sel_Eksisting.innerHTML = Eksisting_options_str;
+            div_Eksisting.appendChild(sel_Eksisting);
+            var lab_Eksisting = document.createElement('div');
+            lab_Eksisting.innerHTML = 'Eksisting';
+            lab_Eksisting.className = 'filterlabel';
+            div_Eksisting.appendChild(lab_Eksisting);
+            var reset_Eksisting = document.createElement('div');
+            reset_Eksisting.innerHTML = 'clear filter';
+            reset_Eksisting.className = 'filterlabel';
+            reset_Eksisting.onclick = function() {
+                var options = document.getElementById("sel_Eksisting").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Eksisting.appendChild(reset_Eksisting);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_WADMKC = document.createElement('div');
+            div_WADMKC.id = "div_WADMKC";
+            div_WADMKC.className= "filterselect";
+            document.getElementById("menu").appendChild(div_WADMKC);
+            sel_WADMKC = document.createElement('select');
+            sel_WADMKC.multiple = true;
+            sel_WADMKC.size = 1;
+            sel_WADMKC.id = "sel_WADMKC";
+            var WADMKC_options_str = "<option value='' unselected></option>";
+            sel_WADMKC.onchange = function(){filterFunc()};
+            WADMKC_options_str  += '<option value="Kecamatan Gubeng">Kecamatan Gubeng</option>';
+            sel_WADMKC.innerHTML = WADMKC_options_str;
+            div_WADMKC.appendChild(sel_WADMKC);
+            var lab_WADMKC = document.createElement('div');
+            lab_WADMKC.innerHTML = 'WADMKC';
+            lab_WADMKC.className = 'filterlabel';
+            div_WADMKC.appendChild(lab_WADMKC);
+            var reset_WADMKC = document.createElement('div');
+            reset_WADMKC.innerHTML = 'clear filter';
+            reset_WADMKC.className = 'filterlabel';
+            reset_WADMKC.onclick = function() {
+                var options = document.getElementById("sel_WADMKC").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_WADMKC.appendChild(reset_WADMKC);
+        </script>
+    </body>
+</html>
